@@ -4,11 +4,15 @@
 
 ## Environment
 
+- Windows
+- Ubuntu / WSL
 - Python
 - `pyserial`
 - Virtual Serial Port Driver (VSPD)
 - Virtual COM Port Pair: `COM7 ↔ COM8`
 - Baud Rate: `115200`
+
+> VSPD의 가상 COM Port(`COM7 ↔ COM8`) 송수신 테스트는 Windows 환경에서 수행했습니다. Ubuntu/WSL은 프로젝트 작업 과정에서 Linux 터미널과 기본 명령어를 익히는 용도로 함께 사용했습니다.
 
 ## Files
 
@@ -38,6 +42,65 @@ Virtual Serial Port Driver
 receiver.py
 ```
 
+## Ubuntu / WSL Practice
+
+프로젝트 작업 과정에서 Ubuntu/WSL 터미널을 사용하며 Linux 기본 명령어도 함께 실습했습니다.
+
+### 현재 위치 확인
+
+```bash
+pwd
+```
+
+### 파일과 디렉터리 확인
+
+```bash
+ls
+ls -al
+```
+
+### 디렉터리 이동
+
+```bash
+cd <directory>
+cd ..
+```
+
+### 디렉터리 생성
+
+```bash
+mkdir <directory>
+```
+
+### 파일 생성 및 확인
+
+```bash
+touch <file>
+cat <file>
+```
+
+### Python 버전 확인 및 실행
+
+```bash
+python3 --version
+python3 sender.py
+python3 receiver.py
+```
+
+### Python 패키지 설치 예시
+
+```bash
+pip install pyserial
+```
+
+`uv` 환경을 사용할 경우에는 다음과 같이 실행할 수 있습니다.
+
+```bash
+uv add pyserial
+uv run python sender.py
+uv run python receiver.py
+```
+
 ## What I Practiced
 
 VSPD를 이용해 `COM7 ↔ COM8` 가상 포트 pair를 구성하고, 실제 Arduino나 센서가 연결되지 않은 환경에서도 Python 프로그램 간 Serial 송수신을 테스트했습니다.
@@ -54,9 +117,11 @@ Virtual COM Port
 Python 수신
 ```
 
+또한 Windows와 Ubuntu/WSL 환경을 함께 사용하면서 Windows의 가상 COM Port 기반 Serial 통신과 Linux 터미널 기본 명령어 사용을 각각 경험했습니다.
+
 ## Run
 
-두 개의 터미널에서 각각 실행합니다.
+VSPD에서 `COM7 ↔ COM8` pair를 생성한 뒤, Windows의 두 개 터미널에서 각각 실행합니다.
 
 ```bash
 python sender.py
@@ -64,6 +129,13 @@ python sender.py
 
 ```bash
 python receiver.py
+```
+
+또는 `uv` 환경에서는 다음과 같이 실행합니다.
+
+```bash
+uv run python sender.py
+uv run python receiver.py
 ```
 
 `receiver.py`에서 다음과 같이 수신되면 정상 동작입니다.
